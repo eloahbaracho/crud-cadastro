@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/Clientes") 
+@RequestMapping("/clientes") 
 
 /* 
  * RequestMapping mostra por qual endpoint esse controller é responsável.
