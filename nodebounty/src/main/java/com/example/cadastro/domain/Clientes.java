@@ -24,9 +24,7 @@ public class Clientes {
 	
 	@Id @GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
-	private String Nome;
-	private String Cep;
-	private String Endereco;
+	
 	
 	/* Indica que o id é gerado automaticamente e 
 	 * não é um valor atribuido pelo usuário
