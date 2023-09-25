@@ -1,5 +1,7 @@
 package com.example.cadastro.domain;
 
+import com.example.cadastro.controllers.RequestClientes;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,11 +26,19 @@ public class Clientes {
 	
 	@Id @GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
+	private String Nome;
+	private String Endereco;
+	private String Cep;
 	
 	
 	/* Indica que o id é gerado automaticamente e 
 	 * não é um valor atribuido pelo usuário
 	 */
 	
-	
+	public Clientes(RequestClientes requestClientes) {
+		this.Nome = requestClientes.Nome();
+		this.Endereco = requestClientes.Endereco();
+		this.Cep = requestClientes.Cep();
+		
+	}
 }
