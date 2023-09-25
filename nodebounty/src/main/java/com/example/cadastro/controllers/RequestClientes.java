@@ -1,7 +1,11 @@
 package com.example.cadastro.controllers;
 
-import org.springframework.http.ResponseEntity;
+import jakarta.validation.constraints.NotBlank;
 
-public record RequestClientes(String Nome, String Endereco, String Cep) {
+public record RequestClientes(
+		@NotBlank String Nome, 
+		@NotBlank String Endereco, 
+		@NotBlank String Cep
+		){
 
 }
