@@ -1,15 +1,19 @@
 package com.example.cadastro.controllers;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cadastro.domain.Clientes;
 import com.example.cadastro.domain.ClientesRepository;
+import com.example.cadastro.domain.RequestClientes;
 
 import jakarta.validation.Valid;
 
@@ -56,5 +60,26 @@ que baterem no /Clientes e sejam do método get
 		 * mas o método ok(...) 
 		 * com parâmetros já devolve direto um objeto ResponseEntity.
 		 */
+	}
+	
+	@PutMapping /*putmapping é o método para atualizar */
+	@Transactional
+	public ResponseEntity updateClientes(@RequestBody @Valid RequestClientes data) {
+		Optional <Clientes> optionalClientes = repository.findById(data.id());
+		if(optionalClientes.isPresent()) {
+			Clientes clientes = optionalClientes.get();
+			clientes.setNome(data.Nome());
+			clientes.setEndereco(data.Endereco());
+			clientes.setCep(data.Cep());
+			clientes.setNumero(data.Numero());
+			clientes.setRg(data.Rg());
+			clientes.setCpf(data.Cpf());
+			clientes.setEmail(data.Email());
+			clientes.setDataNascimento(data.DataNascimento());
+			return ResponseEntity.ok(clientes);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+		
 	}
 }
