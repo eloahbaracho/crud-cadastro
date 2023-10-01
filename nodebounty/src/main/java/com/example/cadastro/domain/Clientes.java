@@ -1,7 +1,5 @@
 package com.example.cadastro.domain;
 
-import com.example.cadastro.controllers.RequestClientes;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +20,7 @@ import lombok.Setter;
 @Setter
 
 @EqualsAndHashCode(of = "id") /* Seleciona a chave primária da tabela em questão */
+
 public class Clientes {
 	
 	@Id @GeneratedValue(strategy = GenerationType.UUID)
@@ -29,6 +28,11 @@ public class Clientes {
 	private String Nome;
 	private String Endereco;
 	private String Cep;
+	private Integer Numero;
+	private String Rg;
+	private String Cpf;
+	private String Email;
+	private String DataNascimento;
 	
 	
 	/* Indica que o id é gerado automaticamente e 
@@ -39,6 +43,11 @@ public class Clientes {
 		this.Nome = requestClientes.Nome();
 		this.Endereco = requestClientes.Endereco();
 		this.Cep = requestClientes.Cep();
+		this.Numero = requestClientes.Numero();
+		this.Rg = requestClientes.Rg();
+		this.Cpf = requestClientes.Cpf();
+		this.Email = requestClientes.Email();
+		this.DataNascimento = requestClientes.DataNascimento();
 		
 	}
 }
