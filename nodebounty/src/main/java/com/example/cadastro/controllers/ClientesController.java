@@ -1,6 +1,7 @@
 package com.example.cadastro.controllers;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import com.example.cadastro.domain.ClientesRepository;
 import com.example.cadastro.domain.RequestClientes;
 
 import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/clientes") 
@@ -73,7 +75,7 @@ que baterem no /Clientes e sejam do método get
 			clientes.setCep(data.Cep());
 			clientes.setNumero(data.Numero());
 			clientes.setRg(data.Rg());
-			clientes.setCpf(data.Cpf());
+			clientes.setCPF(data.CPF());
 			clientes.setEmail(data.Email());
 			clientes.setDataNascimento(data.DataNascimento());
 			return ResponseEntity.ok(clientes);

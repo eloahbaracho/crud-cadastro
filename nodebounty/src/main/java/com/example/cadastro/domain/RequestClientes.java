@@ -9,7 +9,7 @@ public record RequestClientes(
 	@NotNull	 String Cep,
 	@NotNull	 Integer Numero,
 	@NotNull	 String Rg,
-	@NotNull	 String Cpf,
+	@NotNull	 String CPF,
 	@NotNull	 String Email,
 	@NotNull	 String DataNascimento
 		){

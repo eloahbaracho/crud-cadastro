@@ -30,7 +30,7 @@ public class Clientes {
 	private String Cep;
 	private Integer Numero;
 	private String Rg;
-	private String Cpf;
+	private String CPF;
 	private String Email;
 	private String DataNascimento;
 	
@@ -45,9 +45,26 @@ public class Clientes {
 		this.Cep = requestClientes.Cep();
 		this.Numero = requestClientes.Numero();
 		this.Rg = requestClientes.Rg();
-		this.Cpf = requestClientes.Cpf();
+		this.CPF = requestClientes.CPF();
 		this.Email = requestClientes.Email();
 		this.DataNascimento = requestClientes.DataNascimento();
 		
 	}
+
+
+	public void setNome(String Nome) {}
+	
+	public void setEndereco(String Endereco) {}
+	
+	public void setNumero(Integer Numero) {}
+	
+	public void setCep(String Cep) {}
+	
+	public void setRg(String Rg) {}
+	
+	public void setCPF(String CPF) {}
+	
+	public void setEmail(String email) {}
+	
+	public void setDataNascimento(String DataNascimento) {}
 }
