@@ -37,6 +37,8 @@ public class Cliente {
 	private String Cpf;
 	@Column(name = "DATANASCIMENTO")
 	private String DataNascimento;
+	@Column(name = "TELEFONE")
+	private String Telefone;
 	@Column(name = "EMAIL")
 	private String Email;
 	@Column(name = "SENHA")
@@ -55,6 +57,7 @@ public class Cliente {
 		this.Rg = requestClientes.Rg();
 		this.Cpf = requestClientes.Cpf();
 		this.DataNascimento = requestClientes.DataNascimento();
+		this.Telefone = requestClientes.Telefone();
 		this.Email = requestClientes.Email();
 		this.Senha = requestClientes.Senha();
 	}
@@ -71,6 +74,9 @@ public class Cliente {
 		}
 		if (data.Numero() != null) {
 			this.Numero = data.Numero();
+		}
+		if (data.Telefone() != null) {
+			this.Telefone = data.Telefone();
 		}
 		if (data.Senha() != null) {
 			this.Senha = data.Senha();

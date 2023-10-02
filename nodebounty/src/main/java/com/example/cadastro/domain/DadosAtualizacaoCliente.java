@@ -13,6 +13,7 @@ public record DadosAtualizacaoCliente(
 		String Endereco,
 		String Cep,
 		Integer Numero,
+		String Telefone,
 		String Senha
 ) {
 }
