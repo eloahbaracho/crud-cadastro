@@ -15,6 +15,7 @@ public record DadosCadastroCliente(
 	@NotBlank(message="Esse campo é obrigatório")	 String Rg,
 	@NotBlank(message="Esse campo é obrigatório")	 String Cpf,
 	@NotBlank(message="Esse campo é obrigatório")	 String DataNascimento,
+	@NotBlank(message="Esse campo é obrigatório")	 String Telefone,
 	@NotBlank(message="Esse campo é obrigatório") @Email(message="E-mail inválido")	 String Email,
 	@NotBlank(message="Esse campo é obrigatório")	 String Senha
 ){
