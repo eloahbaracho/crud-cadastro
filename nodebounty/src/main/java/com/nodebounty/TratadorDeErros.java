@@ -1,4 +1,4 @@
-package com.example.cadastro;
+package com.nodebounty;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
