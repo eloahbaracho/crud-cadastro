@@ -1,4 +1,4 @@
-package com.nodebounty;
+package com.nodebounty.config;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
