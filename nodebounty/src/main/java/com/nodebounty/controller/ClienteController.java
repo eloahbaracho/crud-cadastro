@@ -1,4 +1,4 @@
-package com.example.cadastro.controller;
+package com.nodebounty.controller;
 
 import java.util.Optional;
 
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.cadastro.domain.Cliente;
-import com.example.cadastro.domain.ClienteRepository;
-import com.example.cadastro.domain.DadosAtualizacaoCliente;
-import com.example.cadastro.domain.DadosCadastroCliente;
+import com.nodebounty.domain.cliente.Cliente;
+import com.nodebounty.domain.cliente.ClienteRepository;
+import com.nodebounty.domain.cliente.DadosAtualizacaoCliente;
+import com.nodebounty.domain.cliente.DadosCadastroCliente;
 
 import jakarta.validation.Valid;
 

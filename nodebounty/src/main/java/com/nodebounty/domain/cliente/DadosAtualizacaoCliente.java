@@ -1,4 +1,4 @@
-package com.example.cadastro.domain;
+package com.nodebounty.domain.cliente;
 
 import jakarta.validation.constraints.NotBlank;
 
