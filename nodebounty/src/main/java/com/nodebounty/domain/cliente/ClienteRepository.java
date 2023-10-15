@@ -1,4 +1,4 @@
-package com.example.cadastro.domain;
+package com.nodebounty.domain.cliente;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

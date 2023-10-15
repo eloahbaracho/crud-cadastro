@@ -1,4 +1,4 @@
-package com.example.cadastro;
+package com.nodebounty;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

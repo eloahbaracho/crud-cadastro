@@ -1,4 +1,4 @@
-package com.example.cadastro.domain;
+package com.nodebounty.domain.cliente;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -9,11 +9,11 @@ import jakarta.validation.constraints.NotBlank;
 
 public record DadosAtualizacaoCliente(
 		@NotBlank(message="Esse campo é obrigatório") String id,
-		String Nome, 
-		String Endereco,
-		String Cep,
-		Integer Numero,
-		String Telefone,
-		String Senha
+		String nome, 
+		String endereco,
+		String cep,
+		Integer numero,
+		String telefone,
+		String senha
 ) {
 }
