@@ -1,11 +1,15 @@
 package com.example.cadastro.domain;
 
+
+import org.springframework.stereotype.Repository;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 /* NotBlank não permite valores null e nem valores vazios como: '' *
 /* Como o ID é um valor que o back-end vai gerar, não precisa nem inserir nos dados de cadastro, mesmo que seja opcional */
+
 
 public record DadosCadastroCliente(
 	@NotBlank(message="Esse campo é obrigatório")	 String Nome, 
