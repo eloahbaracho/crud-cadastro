@@ -17,10 +17,13 @@ import lombok.NoArgsConstructor;
 @Table(name = "CLIENTES")
 @Entity
 @Getter
+
+
 @EqualsAndHashCode(of = "id") /* Seleciona a chave primária da tabela em questão */
 
-public class Cliente {
-	
+
+
+public class Cliente{
 	@Id @GeneratedValue(strategy = GenerationType.UUID) @Column(name = "ID")
 	private String id;
 	@Column(name = "NOME")
