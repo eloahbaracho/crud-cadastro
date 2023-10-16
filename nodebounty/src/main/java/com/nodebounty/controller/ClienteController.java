@@ -65,7 +65,7 @@ public class ClienteController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<?> registerClientes(@RequestBody @Valid DadosCadastroCliente data) {
+	public ResponseEntity registerClientes(@RequestBody @Valid DadosCadastroCliente data) {
 		Cliente newCliente = new Cliente(data);
 		newCliente.setSenha(passwordEncoder.encode(data.senha())); /* Criptografando senha */
 		repository.save(newCliente);
@@ -87,7 +87,7 @@ public class ClienteController {
 
 	@PutMapping /* putmapping é o método para atualizar */
 	@Transactional
-	public ResponseEntity<?> updateCliente(@RequestBody @Valid DadosAtualizacaoCliente data) {
+	public ResponseEntity updateCliente(@RequestBody @Valid DadosAtualizacaoCliente data) {
 		Optional<Cliente> optionalCliente = repository.findById(data.idCliente());
 
 		if (optionalCliente.isPresent()) {
@@ -101,7 +101,7 @@ public class ClienteController {
 	
 	/* Post para realizar login */
 	@PostMapping("/login")
-	public ResponseEntity<?> efetuarLogin(@RequestBody @Valid DadosAutenticacacao data) {
+	public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacacao data) {
 		var token = new UsernamePasswordAuthenticationToken(data.email(), data.senha());
 		var authentication = manager.authenticate(token);
 		
