@@ -20,11 +20,11 @@ import com.nodebounty.domain.plano.PlanoRepository;
 public class LoadDatabase {
 
 	@Autowired
-	ClienteRepository repositoryClientes;
+	private ClienteRepository repositoryClientes;
 	@Autowired
-	CartaoRepository repositoryCartao;
+	private CartaoRepository repositoryCartao;
 	@Autowired
-	PlanoRepository repositoryPlanos;
+	private PlanoRepository repositoryPlanos;
 	
 	@Autowired /* Injetando classe para criptografar senha, no padrão que o springsecurity exige */
 	private PasswordEncoder passwordEncoder;

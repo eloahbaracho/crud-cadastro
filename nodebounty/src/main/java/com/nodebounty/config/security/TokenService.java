@@ -29,11 +29,15 @@ public class TokenService {
 	 * 
 	 * sign() -> Para definir o tipo do JWT e qual sua chave secreta. No caso defini isso na variável algorithm e to chamando aqui.
 	 */
+	
+	private static final String TOKENSECRET = "VALOR_ALEATORIO_PRIVADO_SECRETO_PRA_DIFERENCIAR_NOSSO_BACK_END";
+	private static final String RESTSIGNATURE = "API REST Node Bounty";
+	
 	public String gerarToken(Cliente cliente) {
 		try {
-			var algorithm = Algorithm.HMAC256("VALOR_ALEATORIO_PRIVADO_SECRETO_PRA_DIFERENCIAR_NOSSO_BACK_END");
+			var algorithm = Algorithm.HMAC256(TOKENSECRET);
 			return JWT.create()
-					.withIssuer("API REST Node Bounty")
+					.withIssuer(RESTSIGNATURE)
 					.withSubject(cliente.getEmail())
 					.withClaim("id", cliente.getIdCliente())
 					.withExpiresAt(dataExpiracao())
@@ -50,9 +54,9 @@ public class TokenService {
 	 * */
 	public String getSubject(String tokenJWT) {
 		try {
-			var algorithm = Algorithm.HMAC256("VALOR_ALEATORIO_PRIVADO_SECRETO_PRA_DIFERENCIAR_NOSSO_BACK_END");
+			var algorithm = Algorithm.HMAC256(TOKENSECRET);
 			return JWT.require(algorithm)
-					.withIssuer("API REST Node Bounty")
+					.withIssuer(RESTSIGNATURE)
 					.build()
 					.verify(tokenJWT)
 					.getSubject();
@@ -63,9 +67,9 @@ public class TokenService {
 	
 	public String getUserId(String tokenJWT) {
 		try {
-			var algorithm = Algorithm.HMAC256("VALOR_ALEATORIO_PRIVADO_SECRETO_PRA_DIFERENCIAR_NOSSO_BACK_END");
+			var algorithm = Algorithm.HMAC256(TOKENSECRET);
 			return JWT.require(algorithm)
-					.withIssuer("API REST Node Bounty")
+					.withIssuer(RESTSIGNATURE)
 					.build()
 					.verify(tokenJWT)
 					.getClaim("id")
