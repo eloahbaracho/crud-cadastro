@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,12 +27,11 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/clientes")
-@CrossOrigin(origins = "*")
+@SuppressWarnings("rawtypes")
 
 /*
  * RequestMapping mostra por qual endpoint esse controller é responsável.
  * RestController define um controller
- * CrossOrigin desativa restrições de CORS. Declara aqui pra não precisar ficar declarando em todos os métodos
  */
 
 public class ClienteController {
@@ -56,7 +54,7 @@ public class ClienteController {
 	 * requisições que baterem no /Clientes e sejam do método get
 	 */
 
-	public ResponseEntity<?> GetAllClientes() {
+	public ResponseEntity GetAllClientes() {
 		var allClientes = repository.findAll();
 		return ResponseEntity.ok(allClientes);
 		/*
@@ -90,7 +88,7 @@ public class ClienteController {
 	@PutMapping /* putmapping é o método para atualizar */
 	@Transactional
 	public ResponseEntity<?> updateCliente(@RequestBody @Valid DadosAtualizacaoCliente data) {
-		Optional<Cliente> optionalCliente = repository.findById(data.id());
+		Optional<Cliente> optionalCliente = repository.findById(data.idCliente());
 
 		if (optionalCliente.isPresent()) {
 			Cliente cliente = optionalCliente.get();
