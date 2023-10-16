@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotBlank;
  */
 
 public record DadosAtualizacaoCliente(
-		@NotBlank(message="Esse campo é obrigatório") String id,
+		@NotBlank(message="Esse campo é obrigatório") String idCliente,
 		String nome, 
 		String endereco,
 		String cep,

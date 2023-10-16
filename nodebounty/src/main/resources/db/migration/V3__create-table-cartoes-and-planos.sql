@@ -5,7 +5,7 @@ CREATE TABLE planos (
 );
 
 CREATE TABLE cartoes (
-	id TEXT PRIMARY KEY UNIQUE NOT NULL,
+	idCartao TEXT PRIMARY KEY UNIQUE NOT NULL,
 	titularCartao TEXT NOT NULL,
 	validadeCartao DATE NOT NULL,
 	numeroCartao VARCHAR(16) NOT NULL UNIQUE,

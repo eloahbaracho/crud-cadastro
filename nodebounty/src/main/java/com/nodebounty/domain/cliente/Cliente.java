@@ -26,7 +26,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id") /* Seleciona a chave primária da tabela em questão */
+@EqualsAndHashCode(of = "idCliente") /* Seleciona a chave primária da tabela em questão */
 
 /* Implementando classe necessária para configurar autenticação */
 public class Cliente implements UserDetails {
@@ -38,8 +38,8 @@ public class Cliente implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
-	@Column(name = "ID")
-	private String id;
+	@Column(name = "IDCLIENTE")
+	private String idCliente;
 	@Column(name = "NOME")
 	private String nome;
 	@Column(name = "ENDERECO")

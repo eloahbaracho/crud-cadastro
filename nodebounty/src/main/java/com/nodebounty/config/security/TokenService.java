@@ -35,7 +35,7 @@ public class TokenService {
 			return JWT.create()
 					.withIssuer("API REST Node Bounty")
 					.withSubject(cliente.getEmail())
-					.withClaim("id", cliente.getId())
+					.withClaim("id", cliente.getIdCliente())
 					.withExpiresAt(dataExpiracao())
 					.sign(algorithm);
 		} catch (JWTCreationException exception) {
@@ -56,6 +56,20 @@ public class TokenService {
 					.build()
 					.verify(tokenJWT)
 					.getSubject();
+		} catch (JWTVerificationException exception) {
+			throw new RuntimeException("Token JWT inválido ou expirado!");
+		}
+	}
+	
+	public String getUserId(String tokenJWT) {
+		try {
+			var algorithm = Algorithm.HMAC256("VALOR_ALEATORIO_PRIVADO_SECRETO_PRA_DIFERENCIAR_NOSSO_BACK_END");
+			return JWT.require(algorithm)
+					.withIssuer("API REST Node Bounty")
+					.build()
+					.verify(tokenJWT)
+					.getClaim("id")
+					.asString();
 		} catch (JWTVerificationException exception) {
 			throw new RuntimeException("Token JWT inválido ou expirado!");
 		}
