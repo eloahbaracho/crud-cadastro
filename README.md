@@ -29,6 +29,13 @@ melhora a produtividade do time.
 | REQ02 – | Alterar dados   | A sistema deve ser capaz de alterar os dados do cliente; | Alta |
 | REQ03 – | Exibir dados    | O sistema deve ser capaz de exibir os dados do cliente; | Alta |
 | REQ04 – | Deletar dados   | O sistema deve ser capaz de deletar dados do cliente; | Alta |
+| REQ05 - | Autenticar dados| A Interface de Gestão Financeira deverá ser capaz de autenticar a validar os dados inseridos pelo cliente; | Alta |
+| REQ06 - | Ausência de dados | A Interface deverá ser capaz de identificar a ausência de dados inseridos pelo cliente; | Alta | 
+
+A Interface de Gestão Financeira deverá ser capaz de identificar a ausência de dados inseridos pelo cliente; 
+
+A Interface de Gestão Financeira deverá ser capaz de oferecer um sistema de segurança para os dados do cliente; 
+
 | REQ05 – | Exibir histórico de transações | O sistema deve ser capaz de emitir um extrato das transações feitas anteriormente | Baixa |
 ##### Definição de pronto
 > O sprint será considerado concluido quando:
