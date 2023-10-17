@@ -1,18 +1,19 @@
 ### Fatec - Centro Paula Souza
 ##### Curso - Desenvolvimento de Software Multiplataforma
-##### Estudo de Caso – _Nome do Projeto_
-> No contexto do projeto interdisciplinar o estudo de caso tem como objetivo desenvolver e implantar o Sistema _nome do projeto_. O projeto tem como objetivo facilitar a análise das vendas para apoio a tomada de decisão. É possível analisar
-o histórico das vendas por mês e ano. O relatório do produto mais vendido.....
+##### Estudo de Caso – NodeBounty
+> No contexto do projeto interdisciplinar o estudo de caso tem como objetivo desenvolver e implantar o Sistema NodeBounty. Esse sistema possui o referencial de fintechs modernas, que oferecem serviços e soluções de maneira prática e imediata. A fintech NodeBounty contará com o cadastro do cliente, visualização de conta corrente, serviço de cashback exclusivo, extrato bancário, transações entre contas NodeBounty e outras funcionalidades. 
 Time de desenvolvimento
-- Joaquim da Silva Xavier
-- Jose Bonifacio
-- Isabel Cristina Leopoldina
+- Dayvid Dalton
+- Eloah Baracho
+- Matheus Porto
+- Daniel Viegas
+- Alberto Junior
 ##### Instalação
 O projeto esta em desenvolvimento utilizando STS4 e a linguagem Java 17.
 - No Github selecione a opção clone e copie o endereço do repositório.
 - No STS4 abra a perspectiva Git opção clone.
 - Ao terminar o download import o projeto para o workspace
-- A classe ProdutoAppplication inicializa a execução do projeto
+- A classe nodebountyAppplication inicializa a execução do projeto
 ##### Processo de Desenvolvimento de Software - PDS
 > O PDS segue uma abordagem interativa incremental adaptada do Scrum. A definição de pronto estabelece os mecanismos para
 > controle de qualidade da aplicação.
