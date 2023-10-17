@@ -98,20 +98,6 @@ public class ClienteController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-
-	@DeleteMapping("/{id}")
-	public ResponseEntity deleteCliente(@PathVariable Long id) {
-   		 Optional<Cliente> optionalCliente = repository.findById(productId);
-    			if (optionalCliente.isPresent()) {
-        		Cliente cliente = optionalProduct.get();
-        		repository.delete(cliente);
-        		return ResponseEntity.ok().build();
-   		 } else {
-        	return ResponseEntity.notFound().build();
-    }
-}
-
-	
 	
 	/* Post para realizar login */
 	@PostMapping("/login")

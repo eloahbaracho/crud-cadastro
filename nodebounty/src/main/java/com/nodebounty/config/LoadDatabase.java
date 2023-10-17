@@ -52,11 +52,6 @@ public class LoadDatabase {
 			LocalDate validade2 = LocalDate.of(2024, 6, 30);
 			LocalDate validade3 = LocalDate.of(2024, 9, 15);
 
-			Cartao cartao1 = new Cartao(null, "João Silva", validade1, "1234567890123456", (short) 123, Health);
-			Cartao cartao2 = new Cartao(null, "Maria Souza", validade2, "9876543210987654", (short) 456, Tech);
-			Cartao cartao3 = new Cartao(null, "José Pereira", validade3, "5555666677778888", (short) 789, Beauty);
-
-			repositoryCartao.saveAll(Arrays.asList(cartao1, cartao2, cartao3));
 
 		};
 	}
