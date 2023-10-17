@@ -1,4 +1,4 @@
-Projeto NodeBounty com a junção dos códigos compartimentados.
+Projeto NodeBounty com a junção dos códigos compartimentados. <br>
 Ferramentas e linguagens utilizadas no projeto: <br>
 <br>
 <a href="#" target="_blank" alt="Java">
