@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Mudei o tipo de id pra UUID, igual o da Eloah, portanto o id agora é uma string
  */
 
-public interface CartaoRepository extends JpaRepository<Cartao, String> {
+
+public interface CartaoRepository extends JpaRepository<Cartao,Long > {
 }
