@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-	@@ -12,16 +19,54 @@
+import com.nodebounty.service.CartaoService;
+
+@RestController
 @RequestMapping("/cartoes")
 @SuppressWarnings("rawtypes")
 public class CartaoController {
@@ -30,21 +32,21 @@ public class CartaoController {
 	 logger.info(">>>>>> apicontroller consulta todos");
 	 return ResponseEntity.status(HttpStatus.OK).body(cartaoServico.consultaCartao());
 
-
+	 
 	}
 	 /**
      * Exclui um cartão com base no seu ID.
      * @param cartaoId - O ID do cartão a ser excluído.
      * @return - ResponseEntity com um status HTTP que indica o resultado da exclusão.
      */
-
+	
 	 @CrossOrigin
 	 @DeleteMapping("/{cartaoId}")
 	 public ResponseEntity<Object> excluiCartao(@PathVariable Long cartaoId) {
 		 logger.info(">>>>>> apicontroller exclui cartao: " + cartaoId);
-
+ 
 		 boolean sucesso = cartaoServico.excluiCartao(cartaoId);
-
+ 
 		 if (sucesso) {
 			 return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		 } else {
@@ -56,7 +58,7 @@ public class CartaoController {
 		@PostMapping("/gerar")
 		public ResponseEntity<Object> gerarCartao() {
         logger.info(">>>>>> apicontroller cria cartao");
-
+        
         // Lógica para criar o cartão usando cartaoServico
         boolean sucesso = cartaoServico.gerarCartao();
 
@@ -66,3 +68,5 @@ public class CartaoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar o cartão.");
         }
     }
+
+}

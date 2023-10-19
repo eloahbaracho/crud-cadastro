@@ -8,22 +8,20 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nodebounty.config.security.DadosTokenJwt;
 import com.nodebounty.config.security.TokenService;
 import com.nodebounty.domain.cliente.Cliente;
 import com.nodebounty.domain.cliente.ClienteRepository;
 import com.nodebounty.domain.cliente.DadosAtualizacaoCliente;
 import com.nodebounty.domain.cliente.DadosAutenticacacao;
 import com.nodebounty.domain.cliente.DadosCadastroCliente;
+import com.nodebounty.config.security.DadosTokenJwt;
 
 import jakarta.validation.Valid;
 
@@ -39,17 +37,14 @@ import jakarta.validation.Valid;
 public class ClienteController {
 	@Autowired /* Injeção de dependência */
 	private ClienteRepository repository;
-
+	
 	@Autowired /* Injetando classe para realizar login e autenticação */
 	private AuthenticationManager manager;
-
+	
 	@Autowired /* Injetando serviço de geração de token jwt para autenticação */
 	private TokenService tokenService;
-
-	@Autowired /*
-				 * Injetando classe para criptografar senha, no padrão que o springsecurity
-				 * exige
-				 */
+	
+	@Autowired /* Injetando classe para criptografar senha, no padrão que o springsecurity exige */
 	private PasswordEncoder passwordEncoder;
 
 	@GetMapping
@@ -97,39 +92,21 @@ public class ClienteController {
 
 		if (optionalCliente.isPresent()) {
 			Cliente cliente = optionalCliente.get();
-			
-			/* AQUI PRECISARIA CRIPTOGRAFAR A NOVA SENHA CASO HAJA, PRA CONTINUAR FUNCIONANDO A AUTENTICAÇÃO
-			 * Isso provavelmente será feito na classe de serviço do cliente, já que não posso injetar dependência na entidade
-			 */
-			
 			cliente.atualizarDados(data);
 			return ResponseEntity.ok().build();
 		} else {
 			return ResponseEntity.notFound().build();
 		}
 	}
-
-	@DeleteMapping("/{id}")
-	public ResponseEntity deleteCliente(@PathVariable String id) {
-		Optional<Cliente> optionalCliente = repository.findById(id);
-
-		if (optionalCliente.isPresent()) {
-			Cliente cliente = optionalCliente.get();
-			repository.delete(cliente);
-			return ResponseEntity.noContent().build();
-		} else {
-			return ResponseEntity.notFound().build();
-		}
-	}
-
+	
 	/* Post para realizar login */
 	@PostMapping("/login")
 	public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacacao data) {
 		var token = new UsernamePasswordAuthenticationToken(data.email(), data.senha());
 		var authentication = manager.authenticate(token);
-
+		
 		var tokenJWT = tokenService.gerarToken((Cliente) authentication.getPrincipal());
-
+		
 		return ResponseEntity.ok(new DadosTokenJwt(tokenJWT));
 	}
 }

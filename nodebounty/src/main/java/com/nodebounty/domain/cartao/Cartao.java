@@ -5,7 +5,19 @@ import java.util.Random;
 
 import com.nodebounty.domain.plano.Plano;
 
-	@@ -20,27 +21,58 @@
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+/* Nenhuma mudança relevante. Apenas mudou o tipo do id pra String, pra deixar igual o da classe Cliente, um id do tipo UUID.
  * Como o H2 vai salvar as propriedades tudo em maiúsculo, preciso dizer que no BD a propriedade 'titularCartao' vai ser 'TITULARCARTAO'
  * Por isso uso o @Column em todas. O @Table faz o mesmo mas com a tabela em si. */
 
@@ -33,7 +45,7 @@ public class Cartao {
 	public Cartao() {
 		gerarCartao();
 	}
-
+	
 	public void gerarCartao(){
 		this.validadeCartao = gerarValidade();
 		this.numeroCartao = gerarNumero();
