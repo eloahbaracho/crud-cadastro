@@ -52,8 +52,6 @@ public class LoadDatabase {
 			LocalDate validade2 = LocalDate.of(2024, 6, 30);
 			LocalDate validade3 = LocalDate.of(2024, 9, 15);
 
-			repositoryCartao.saveAll(Arrays.asList(cartao1, cartao2, cartao3));
-
 		};
 	}
 
