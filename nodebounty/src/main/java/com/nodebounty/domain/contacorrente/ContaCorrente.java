@@ -27,7 +27,7 @@ public class ContaCorrente {
 	@OneToOne // Indica o relacionamento 1:1
 	@JoinColumn(name = "IDCLIENTE", referencedColumnName = "IDCLIENTE") // Cria a coluna no banco chamada "IDCLIENTE" e
 																		// faz a referência ao id do Cliente
-	private Cliente cliente; // Adiciona um campo para representar o Cliente em sua Conta Corrente
+	 // Adiciona um campo para representar o Cliente em sua Conta Corrente
 	@Column(name = "IDCARTAO")
 	private String idCartao;
 
@@ -39,6 +39,10 @@ public class ContaCorrente {
 	private Plano plano; // Alterado para o tipo Plano
 
 	@Column(name = "SALDOCONTA")
-	private double saldoConta;
+	private double saldoConta = 0.0;
+	
+	private int NumeroConta;
+	private Cliente cliente;
+	private static int ContadorDeContas = 1;
 
 }
