@@ -1,5 +1,5 @@
 package com.nodebounty.domain.cliente;
-import com.nodebounty.domain.transacao.*;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -38,7 +38,6 @@ public class Cliente implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
-	private static int ContadorDeClientes = 1;
 	@Column(name = "IDCLIENTE")
 	private String idCliente;
 	@Column(name = "NOME")
@@ -61,6 +60,8 @@ public class Cliente implements UserDetails {
 	private String email;
 	@Column(name = "SENHA")
 	private String senha;
+	
+	private static int ContadorDeClientes = 1;
 
 	/*
 	 * Construtor para cadastrar novo cliente com base nos dados recebidos pelo
@@ -79,11 +80,6 @@ public class Cliente implements UserDetails {
 		this.email = requestClientes.email();
 		this.senha = requestClientes.senha();
 		ContadorDeClientes += 1;
-		/*
-		 * Método para atualizar cliente com base nos dados recebidos pelo controller
-		 * Como todos os campos são opcionais, verifico primeiro se foi enviado algo. Se
-		 * tiver sido, ai eu atualizo
-		 */
 	}
 	
 	public String ListarCliente() {
@@ -92,9 +88,12 @@ public class Cliente implements UserDetails {
 				"\nEmail: " + this.getEmail() + 
 				"\nId: " + this.getIdCliente();
 	}
-
 	
-
+	/*
+	 * Método para atualizar cliente com base nos dados recebidos pelo controller
+	 * Como todos os campos são opcionais, verifico primeiro se foi enviado algo. Se
+	 * tiver sido, ai eu atualizo
+	 */
 	public void atualizarDados(DadosAtualizacaoCliente data) {
 		if (data.nome() != null) {
 			this.nome = data.nome();

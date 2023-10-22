@@ -1,6 +1,5 @@
 package com.nodebounty.config;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.nodebounty.domain.cartao.Cartao;
-import com.nodebounty.domain.cartao.CartaoRepository;
 import com.nodebounty.domain.cliente.Cliente;
 import com.nodebounty.domain.cliente.ClienteRepository;
 import com.nodebounty.domain.plano.Plano;
@@ -21,8 +18,7 @@ public class LoadDatabase {
 
 	@Autowired
 	private ClienteRepository repositoryClientes;
-	@Autowired
-	private CartaoRepository repositoryCartao;
+
 	@Autowired
 	private PlanoRepository repositoryPlanos;
 	
@@ -46,12 +42,6 @@ public class LoadDatabase {
 			Plano Health = new Plano("Health", 5.00, "Growth, OficialFarma, Drogasil");
 
 			repositoryPlanos.saveAll(Arrays.asList(Beauty, Tech, Health));
-
-			// Salvando cartões para teste
-			LocalDate validade1 = LocalDate.of(2023, 12, 31);
-			LocalDate validade2 = LocalDate.of(2024, 6, 30);
-			LocalDate validade3 = LocalDate.of(2024, 9, 15);
-
 
 		};
 	}

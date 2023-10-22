@@ -1,7 +1,10 @@
 package com.nodebounty.domain.contacorrente;
 
+import java.util.Random;
+
 import com.nodebounty.domain.cliente.Cliente;
 import com.nodebounty.domain.plano.Plano;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,25 +28,35 @@ public class ContaCorrente {
 	@GeneratedValue(strategy = GenerationType.UUID)
 	@Column(name = "IDCONTA")
 	private String idConta;
-	@OneToOne // Indica o relacionamento 1:1
-	@JoinColumn(name = "IDCLIENTE", referencedColumnName = "IDCLIENTE") // Cria a coluna no banco chamada "IDCLIENTE" e
-																		// faz a referência ao id do Cliente
-	 // Adiciona um campo para representar o Cliente em sua Conta Corrente
-	@Column(name = "IDCARTAO")
-	private String idCartao;
+	
+	/* Associação 1:1, uma conta corrente possui somente um cliente, a ligação ocorre por meio do atributo de Cliente.java -> IDCLIENTE */
+	@OneToOne
+	@JoinColumn(name = "IDCLIENTE", referencedColumnName = "IDCLIENTE")
+	private Cliente cliente;
 
-	@OneToOne // Indica o relacionamento 1:1, ou seja, uma conta corrente está associada a um único plano
-	@JoinColumn(name = "IDPLANO", referencedColumnName = "IDPLANO") // A referência precisa ser necessariamente
-																				// o nome da tabela,
-																				// Neste caso "ID_PLANO", como está
-																				// definida em @Column de Plano.java
-	private Plano plano; // Alterado para o tipo Plano
+	/* Associação 1:1, uma conta corrente possui somente um plano, a ligação ocorre por meio do atributo de Plano.java -> IDPLANO */
+	@OneToOne
+	@JoinColumn(name = "IDPLANO", referencedColumnName = "IDPLANO") 
+	private Plano plano;
 
 	@Column(name = "SALDOCONTA")
 	private double saldoConta = 0.0;
 	
-	private int NumeroConta;
-	private Cliente cliente;
-	private static int ContadorDeContas = 1;
+	/* Como a gente não vai usar o número para nenhuma operação matématica, acho que String é mais performático */
+	@Column(name = "NUMEROCONTA")
+	private String numeroConta;
+	
+	/* Método que será executado ANTES de salvar a conta no banco. Ele vai gerar um número aleatório de 20 digitos
+	 * para a conta corrente e converter para string*/
+    @PrePersist
+    protected void onCreate() {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder(20);
+        for (int i = 0; i < 20; i++) {
+            sb.append(random.nextInt(10)); // Append a random digit (0-9)
+        }
+        this.numeroConta = sb.toString();
+    }
 
+	private static int ContadorDeContas = 1;
 }
