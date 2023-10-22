@@ -17,7 +17,6 @@ import com.nodebounty.service.CartaoService;
 
 @RestController
 @RequestMapping("/cartoes")
-@SuppressWarnings("rawtypes")
 public class CartaoController {
 	Logger logger = LogManager.getLogger(this.getClass());
 	@Autowired
