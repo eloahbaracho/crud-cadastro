@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.nodebounty.domain.cliente.Cliente;
 import com.nodebounty.domain.plano.Plano;
+import com.nodebounty.domain.transacao.Transacao;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -88,7 +89,8 @@ public class ContaCorrente {
 		return "\nNome: " + this.cliente.getNome() +
 		 		"\nCpf: " + this.cliente.getCpf() +
 		 		"\nNumero da Conta: " + this.getnumeroConta() +
-		 		"\nEmail: " + this.cliente.getEmail();
-		 		
+		 		"\nEmail: " + this.cliente.getEmail() +
+		 		"\nSaldo: " + Transacao.DoubleToString(this.getSaldo()) +
+		 		"\n";
 	}
 }
