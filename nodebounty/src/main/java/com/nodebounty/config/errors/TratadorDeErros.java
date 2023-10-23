@@ -1,4 +1,4 @@
-package com.nodebounty.config;
+package com.nodebounty.config.errors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -24,7 +24,6 @@ public class TratadorDeErros {
 		public DadosErroValidacao(FieldError erro) {
 			this(erro.getField(), erro.getDefaultMessage());
 		}
-		
+
 	}
-	
 }
