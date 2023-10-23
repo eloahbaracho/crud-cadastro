@@ -59,4 +59,36 @@ public class ContaCorrente {
     }
 
 	private static int ContadorDeContas = 1;
+	
+	public String getnumeroConta() {
+		return numeroConta;
+	}
+	
+	public void setnumeroConta(String numeroConta) {
+		this.numeroConta = numeroConta;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
+	public Double getSaldo() {
+		return saldoConta = 0.0;
+		
+	}
+	
+	public void setSaldo(Double saldoConta) {
+		this.saldoConta = saldoConta;
+	}
+	
+	public String toString() {
+		return "\nNome: " + this.cliente.getNome() +
+		 		"\nCpf: " + this.cliente.getCpf() +
+		 		"\nNumero da Conta: " + this.getnumeroConta() +
+		 		"\nEmail: " + this.cliente.getEmail();
+		 		
+	}
 }
