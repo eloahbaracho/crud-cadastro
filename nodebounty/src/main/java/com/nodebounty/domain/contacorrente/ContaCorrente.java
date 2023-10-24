@@ -93,4 +93,77 @@ public class ContaCorrente {
 		 		"\nSaldo: " + Transacao.DoubleToString(this.getSaldo()) +
 		 		"\n";
 	}
+	
+	/* ------------------------------------------------------------- */
+    @Autowired /* Injeção de dependência */
+	private ClienteRepository repository;
+    @PostMapping("/depositar")
+    @Transactional
+    public ResponseEntity depositar(@RequestBody @Valid DadosTransacaoCliente data) {
+        Optional<Cliente> optionalCliente = repository.findById(data.idCliente());
+ 
+        if (optionalCliente.isPresent()) {
+            Cliente cliente = optionalCliente.get();
+            double valorDeposito = DadosTransacaoCliente
+            
+            if (valorDeposito > 0) {
+                cliente.depositar(valorDeposito);
+                repository.save(cliente);
+                return ResponseEntity.ok().build();
+            } else {
+                return ResponseEntity.badRequest().body("O valor do depósito deve ser maior que zero.");
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    /* ------------------------------------------------------------- */
+    @PostMapping("/transferir")
+    @Transactional
+    public ResponseEntity transferir(@RequestBody @Valid DadosTransacaoCliente data) {
+        Optional<Cliente> remetenteOptional = repository.findById(dadosTransferencia.idRemetente());
+        Optional<Cliente> destinatarioOptional = repository.findById(dadosTransferencia.idDestinatario());
+ 
+        if (remetenteOptional.isPresent() && destinatarioOptional.isPresent()) {
+            Cliente remetente = remetenteOptional.get();
+            Cliente destinatario = destinatarioOptional.get();
+            double valorTransferencia = valorTransferencia.getValor();
+ 
+            if (valorTransferencia > 0 && remetente.possuiSaldoSuficiente(valorTransferencia)) {
+                remetente.sacar(valorTransferencia);
+                destinatario.depositar(valorTransferencia);
+                repository.save(remetente);
+                repository.save(destinatario);
+                return ResponseEntity.ok().build();
+            } else {
+                return ResponseEntity.badRequest().body("Transferência não pode ser realizada. Verifique o saldo e o valor da transferência.");
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    /* ------------------------------------------------------------- */
+    @PostMapping("/sacar")
+    @Transactional
+    public ResponseEntity sacar(@RequestBody @Valid DadosTransacaoCliente data) {
+        Optional<Cliente> optionalCliente = repository.findById(dadosSaque.idCliente());
+ 
+        if (optionalCliente.isPresent()) {
+            Cliente cliente = optionalCliente.get();
+            double valorSaque = dadosSaque.getValor();
+ 
+            if (valorSaque > 0 && cliente.possuiSaldoSuficiente(valorSaque)) {
+                cliente.sacar(valorSaque);
+                repository.save(cliente);
+                return ResponseEntity.ok().build();
+            } else {
+                return ResponseEntity.badRequest().body("Saque não pode ser realizado. Verifique o saldo e o valor do saque.");
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    
+}
 }
