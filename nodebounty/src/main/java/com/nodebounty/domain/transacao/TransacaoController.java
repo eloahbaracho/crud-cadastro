@@ -4,6 +4,7 @@ import com.nodebounty.domain.contacorrente.ContaCorrente;
 
 public class TransacaoController extends ContaCorrente {
 
+	/*
 	public void Depositar(Double valor) {
 		if (valor > 0 ) {
 			setSaldoConta(getSaldoConta() + valor);
@@ -29,4 +30,5 @@ public class TransacaoController extends ContaCorrente {
 		System.out.println("O sistema não foi capaz de processar sua transferência. Tente novamente.");
 		}
 	}
+	*/
 }
