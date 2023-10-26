@@ -1,7 +1,0 @@
-CREATE TABLE contacorrente (
-	idConta TEXT PRIMARY KEY UNIQUE NOT NULL,
-	idCliente TEXT NOT NULL UNIQUE,
-	idPlano TEXT NOT NULL,
-	saldoConta DOUBLE NOT NULL,
-	numeroConta TEXT UNIQUE NOT NULL
-);

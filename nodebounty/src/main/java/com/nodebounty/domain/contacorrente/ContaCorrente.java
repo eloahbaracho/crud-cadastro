@@ -94,8 +94,8 @@ public class ContaCorrente {
 		 		"\n";
 	}
 	
-	/* ------------------------------------------------------------- */
-    @Autowired /* Injeção de dependência */
+	/*
+    @Autowired /* Injeção de dependência
 	private ClienteRepository repository;
     @PostMapping("/depositar")
     @Transactional
@@ -117,7 +117,7 @@ public class ContaCorrente {
             return ResponseEntity.notFound().build();
         }
     }
-    /* ------------------------------------------------------------- */
+    /* 
     @PostMapping("/transferir")
     @Transactional
     public ResponseEntity transferir(@RequestBody @Valid DadosTransacaoCliente data) {
@@ -142,7 +142,7 @@ public class ContaCorrente {
             return ResponseEntity.notFound().build();
         }
     }
-    /* ------------------------------------------------------------- */
+    /* 
     @PostMapping("/sacar")
     @Transactional
     public ResponseEntity sacar(@RequestBody @Valid DadosTransacaoCliente data) {
@@ -163,7 +163,6 @@ public class ContaCorrente {
             return ResponseEntity.notFound().build();
         }
     }
-    
-    
 }
+*/
 }
