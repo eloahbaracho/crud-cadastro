@@ -2,33 +2,31 @@ package com.nodebounty.domain.transacao;
 
 import com.nodebounty.domain.contacorrente.ContaCorrente;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class TransacaoController extends ContaCorrente {
 
-	/*
-	public void Depositar(Double valor) {
-		if (valor > 0 ) {
-			setSaldoConta(getSaldoConta() + valor);
-			System.out.println("Seu depósito foi realizado com sucesso!");
-		} else 
-			System.out.println("Não foi possível realizar o seu depósito. Verifique o valor atribuído.");
+	void depositar(Double valor) {
+		saldoConta = getSaldo() + valor;
 	}
 	
-	public void Sacar(Double valor) {
-		if(valor > 0 && this.getSaldo() >= valor) {
-			setSaldoConta(getSaldoConta() - valor);
-			System.out.println("Saque concluído com sucesso");
-		} else 
-			System.out.println("Não foi possível realizar o seu saque. Verifique o valor atribuído.");
+	void sacar(Double valor) {
+		saldoConta = getSaldo() - valor;
 	}
 	
-	public void Transferir(String idConta, Double valor) {
-		if (valor > 0 && this.getSaldo() >= valor) {
-			setSaldoConta(getSaldoConta() - valor);
-			idConta.saldoConta = idConta.getSaldoConta() + valor;
-			System.out.println("Sua transferência foi concluída com sucesso");
-	} else {
-		System.out.println("O sistema não foi capaz de processar sua transferência. Tente novamente.");
+
+	/* public class Moeda {
+
+	static NumberFormat FormatadorMoeda = new DecimalFormat("R$ ##,#0.00");
+	
+	public static String DoubleToString(Double valor) {
+		return FormatadorMoeda.format(valor);
 		}
 	}
 	*/
+	
+	public void transferir(String numeroConta, Double valor) {
+		
+	}
 }
