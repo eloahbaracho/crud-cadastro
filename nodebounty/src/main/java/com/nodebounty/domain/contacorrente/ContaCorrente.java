@@ -4,7 +4,6 @@ import java.util.Random;
 
 import com.nodebounty.domain.cliente.Cliente;
 import com.nodebounty.domain.plano.Plano;
-import com.nodebounty.domain.transacao.Transacao;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -82,6 +81,33 @@ public class ContaCorrente {
 	
 	public void setSaldo(Double saldoConta) {
 		this.saldoConta = saldoConta;
+	}
+	
+	/* Transações */
+	
+	public void sacar(double valor) {
+		if (valor <= 0 && valor < saldoConta) {
+			saldoConta -= valor;
+		} else {
+			throw new IllegalArgumentException("Saldo insuficiente");
+		}
+	}
+	
+	public void depositar(double valor) {
+		if(valor > 0) {
+			saldoConta += valor;
+		} else {
+			throw new IllegalArgumentException("Valor inválido para depósito");
+		}
+	}
+	
+	public void transferir(ContaCorrente ContaDestino, double valor) {
+		if ( valor > 0 && valor <= saldoConta) {
+			saldoConta -= valor;
+			ContaDestino.depositar(valor);
+		} else {
+			throw new IllegalArgumentException("Não foi possível realizar a transferência");
+		}
 	}
 	
 	
