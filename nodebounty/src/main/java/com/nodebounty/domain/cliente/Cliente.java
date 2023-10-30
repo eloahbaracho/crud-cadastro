@@ -94,7 +94,7 @@ public class Cliente implements UserDetails {
 	 * Como todos os campos são opcionais, verifico primeiro se foi enviado algo. Se
 	 * tiver sido, ai eu atualizo
 	 */
-	public void atualizarDados(DadosAtualizacaoCliente data) {
+	public void atualizarDados(DadosAtualizacaoCliente data, String senha) {
 		if (data.nome() != null) {
 			this.nome = data.nome();
 		}
@@ -110,8 +110,8 @@ public class Cliente implements UserDetails {
 		if (data.telefone() != null) {
 			this.telefone = data.telefone();
 		}
-		if (data.senha() != null) {
-			this.senha = data.senha();
+		if (senha != null) {
+			this.senha = senha;
 		}
 	}
 

@@ -8,5 +8,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, String> {
 
 	// Método necessário para autenticação
 	UserDetails findByEmail(String email);
+
+	boolean existsByRgOrCpfOrEmail(String rg, String cpf, String email);
 	
 }

@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nodebounty.config.errors.ErroCustomizadoDTO;
 import com.nodebounty.config.errors.RegistroNaoEncontradoException;
 import com.nodebounty.domain.contacorrente.DadosPlanoSelecionado;
-import com.nodebounty.service.ContaCorrenteService;
+import com.nodebounty.service.IContaCorrenteService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
@@ -23,16 +24,17 @@ import jakarta.validation.Valid;
 public class ContaCorrenteController {
 
 	@Autowired
-	private ContaCorrenteService service;
+	private IContaCorrenteService service;
 	
 	// Método para cadastrar uma nova conta. É executado quando o cliente escolhe o plano
 	@PostMapping
+	@Transactional
 	public ResponseEntity registerAccount(@RequestBody @Valid DadosPlanoSelecionado json, HttpServletRequest request) {
 		// No token jwt eu tenho o id do cliente, basicamente aqui to puxando de lá o id
 		var idCliente = request.getAttribute("idCliente");
 
 		try {
-			service.cadastrarNovaContaCorrente(json, (String) idCliente);
+			service.cadastrarContaCorrente(json, (String) idCliente);
 			return ResponseEntity.ok().build();
 		}
 		catch(RegistroNaoEncontradoException e) {

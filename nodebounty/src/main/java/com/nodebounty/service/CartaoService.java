@@ -13,7 +13,7 @@ import com.nodebounty.domain.contacorrente.ContaCorrenteRepository;
 
 
 @Service
-public class CartaoService {
+public class CartaoService implements ICartaoService {
 
 	@Autowired
 	private CartaoRepository cartaoRepository;
@@ -28,7 +28,7 @@ public class CartaoService {
 	// Ja que optamos por separar o cliente da conta, pra facilitar nas requisições, invés de receber
 	// o id da conta diretamente, vamos usar o do cliente, e com o do cliente buscar os dados da conta
 	// para ai sim associar a conta ao cartao
-    public Cartao gerarNovoCartao(String idCliente){
+    public Cartao cadastrarCartao(String idCliente){
     	var cliente = clienteRepository.findById(idCliente);
     	
     	// Verificando se o cliente existe
@@ -51,7 +51,8 @@ public class CartaoService {
     	return cartaoRepository.save(cartao);
     }
     
-    public List<Cartao> consultaTodosCartoesPeloIdDoCliente(String idCliente) {
+    // Listando TODOS cartões associado a uma conta
+    public List<Cartao> consultarCartoesDoCliente(String idCliente) {
     	var cliente = clienteRepository.findById(idCliente);
     	
     	// Verificando se o cliente existe
@@ -70,8 +71,9 @@ public class CartaoService {
     	return cartaoRepository.findAllByConta(conta);
     }
     
-    public void excluiCartao(String cartaoId) {
-    	var cartaoExisteNoSistema = cartaoRepository.existsById(cartaoId);
+    // Excluindo um cartão pelo id
+    public void excluirCartao(String idCartao) {
+    	var cartaoExisteNoSistema = cartaoRepository.existsById(idCartao);
     	
     	// Retornando erro caso o id do cartao não exista no banco
     	if (!cartaoExisteNoSistema) {
@@ -80,7 +82,7 @@ public class CartaoService {
     	
     	// Excluindo cartao
     	
-    	cartaoRepository.deleteById(cartaoId);
+    	cartaoRepository.deleteById(idCartao);
     }
     
 }

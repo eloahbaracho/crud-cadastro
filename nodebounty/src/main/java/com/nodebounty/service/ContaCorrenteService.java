@@ -12,7 +12,7 @@ import com.nodebounty.domain.plano.PlanoRepository;
 
 
 @Service
-public class ContaCorrenteService {
+public class ContaCorrenteService implements IContaCorrenteService {
 
 	@Autowired
 	private ContaCorrenteRepository contaRepository;
@@ -22,7 +22,7 @@ public class ContaCorrenteService {
 	private ClienteRepository clienteRepository;
 	
 	// Método cadastrar nova conta corrente
-	public void cadastrarNovaContaCorrente(DadosPlanoSelecionado data, String idCliente) throws Exception {
+	public void cadastrarContaCorrente(DadosPlanoSelecionado data, String idCliente) throws Exception {
 		var plano = planoRepository.findById(data.nomePlano());
 		var cliente = clienteRepository.findById(idCliente);
 		
@@ -66,4 +66,5 @@ public class ContaCorrenteService {
 		// Fluxo bem sucedido, retornando dados da conta corrente
 		return conta;
 	}
+
 }
