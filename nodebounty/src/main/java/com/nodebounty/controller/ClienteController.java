@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -108,6 +109,26 @@ public class ClienteController {
 		try {
 			var clienteAtualizado = service.atualizarCliente(data, (String) idCliente);
 			return ResponseEntity.ok(clienteAtualizado);
+		}
+		catch(RegistroNaoEncontradoException e) {
+			// Tratando exceções quando não encontra o registro no banco, para retornar um código HTTP 404 - Not found
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErroCustomizadoDTO(e.getMessage()));
+		}
+		catch (Exception e) {
+			// Tratando qualquer outro tipo de erro, retornando um 400 - Bad request
+			e.printStackTrace();
+			return ResponseEntity.badRequest().body(new ErroCustomizadoDTO(e.getMessage()));
+		}
+	}
+	
+	@DeleteMapping /* Método para deletar */
+	@Transactional
+	public ResponseEntity deleteCliente(HttpServletRequest request) {
+		var idCliente = request.getAttribute("idCliente");
+		
+		try {
+			service.deletarCliente((String) idCliente);
+			return ResponseEntity.noContent().build();
 		}
 		catch(RegistroNaoEncontradoException e) {
 			// Tratando exceções quando não encontra o registro no banco, para retornar um código HTTP 404 - Not found
