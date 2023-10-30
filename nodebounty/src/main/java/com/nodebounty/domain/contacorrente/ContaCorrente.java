@@ -4,7 +4,6 @@ import java.util.Random;
 
 import com.nodebounty.domain.cliente.Cliente;
 import com.nodebounty.domain.plano.Plano;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -86,29 +85,35 @@ public class ContaCorrente {
 	/* Transações */
 	
 	public void sacar(double valor) {
-		if (valor <= 0 && valor < saldoConta) {
-			saldoConta -= valor;
-		} else {
-			throw new IllegalArgumentException("Saldo insuficiente");
-		}
-	}
-	
-	public void depositar(double valor) {
-		if(valor > 0) {
-			saldoConta += valor;
-		} else {
-			throw new IllegalArgumentException("Valor inválido para depósito");
-		}
-	}
-	
-	public void transferir(ContaCorrente ContaDestino, double valor) {
-		if ( valor > 0 && valor <= saldoConta) {
-			saldoConta -= valor;
-			ContaDestino.depositar(valor);
-		} else {
-			throw new IllegalArgumentException("Não foi possível realizar a transferência");
-		}
-	}
+        if (valor > 0 && valor <= saldoConta) {
+            saldoConta -= valor;
+            System.out.println("Saque de " + valor + " realizado com sucesso na conta.");
+            System.out.println("Saldo atual da conta: " + saldoConta);
+        } else {
+            throw new IllegalArgumentException("Saldo insuficiente para saque.");
+        }
+    }
+
+    public void depositar(double valor) {
+        if (valor > 0) {
+            saldoConta += valor;
+            System.out.println("Depósito de " + valor + " realizado com sucesso na conta.");
+            System.out.println("Saldo atual da conta: " + saldoConta);
+        } else {
+            throw new IllegalArgumentException("Valor inválido para depósito.");
+        }
+    }
+
+    public void transferir(ContaCorrente contaDestino, double valor) {
+        if (valor > 0 && valor <= saldoConta) {
+            saldoConta -= valor;
+            contaDestino.depositar(valor);
+            System.out.println("Transferência de " + valor + " realizada com sucesso da conta para a conta de destino.");
+            System.out.println("Saldo atual da conta de origem: " + saldoConta);
+        } else {
+            throw new IllegalArgumentException("Não foi possível realizar a transferência devido a saldo insuficiente.");
+        }
+    }
 	
 	
 	
