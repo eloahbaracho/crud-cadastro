@@ -1,6 +1,7 @@
 package com.nodebounty.domain.contacorrente;
 
 import java.util.Random;
+import java.util.UUID;
 
 import com.nodebounty.domain.cliente.Cliente;
 import com.nodebounty.domain.plano.Plano;
@@ -84,6 +85,8 @@ public class ContaCorrente {
 	
 	/* Transações */
 	
+   
+	
 	public void sacar(double valor) {
         if (valor > 0 && valor <= saldoConta) {
             saldoConta -= valor;
@@ -105,13 +108,9 @@ public class ContaCorrente {
     }
 
     public void transferir(ContaCorrente contaDestino, double valor) {
-        if (valor > 0 && valor <= saldoConta) {
-            saldoConta -= valor;
-            contaDestino.depositar(valor);
-            System.out.println("Transferência de " + valor + " realizada com sucesso da conta para a conta de destino.");
-            System.out.println("Saldo atual da conta de origem: " + saldoConta);
-        } else {
-            throw new IllegalArgumentException("Não foi possível realizar a transferência devido a saldo insuficiente.");
+        UUID idTransferencia = UUID.randomUUID(); // id da transferência
+        if ( valor < 0 && valor < saldoConta) {
+        saldoConta -= valor;
         }
     }
 	
