@@ -10,6 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.nodebounty.domain.cliente.Cliente;
 import com.nodebounty.domain.cliente.ClienteRepository;
+import com.nodebounty.domain.contacorrente.ContaCorrente;
+import com.nodebounty.domain.contacorrente.ContaCorrenteRepository;
 import com.nodebounty.domain.plano.Plano;
 import com.nodebounty.domain.plano.PlanoRepository;
 
@@ -18,6 +20,9 @@ public class LoadDatabase {
 
 	@Autowired
 	private ClienteRepository repositoryClientes;
+	
+	@Autowired
+	private ContaCorrenteRepository repositoryConta;
 
 	@Autowired
 	private PlanoRepository repositoryPlanos;
@@ -42,7 +47,10 @@ public class LoadDatabase {
 			Plano Health = new Plano("Health", 5.00, "Growth, OficialFarma, Drogasil");
 
 			repositoryPlanos.saveAll(Arrays.asList(Beauty, Tech, Health));
-
+			
+			// Salvando conta para testes
+			ContaCorrente conta = new ContaCorrente("6f78fac2-fe0d-4634-a3bf-025803557096", cliente1, Beauty, 0.0, "12345678912345678912", null, null);
+			repositoryConta.save(conta); 
 		};
 	}
 
