@@ -49,7 +49,7 @@ public class LoadDatabase {
 			repositoryPlanos.saveAll(Arrays.asList(Beauty, Tech, Health));
 			
 			// Salvando conta para testes
-			ContaCorrente conta = new ContaCorrente("6f78fac2-fe0d-4634-a3bf-025803557096", cliente1, Beauty, 0.0, "12345678912345678912", null, null);
+			ContaCorrente conta = new ContaCorrente("6f78fac2-fe0d-4634-a3bf-025803557096", cliente1, Beauty, 0.0, "12345678912345678912");
 			repositoryConta.save(conta); 
 		};
 	}
