@@ -64,11 +64,11 @@ public class TransacaoController {
 		// E o receptor a conta do cliente. Assim no front vai ser possível listar entradas / saídas de forma mais eficaz
 		var transacao = new Transacao();
 		transacao.setValorTransacao(json.valor());
-		transacao.setEmissor(conta);
 		transacao.setReceptor(conta);
 		transacaoRepository.save(transacao);
 		
-		return ResponseEntity.ok("Deposito com sucesso");
+		// Retornando os dados da transação pro front-end, como 'comprovante'
+		return ResponseEntity.ok(transacao);
 	}
 	
 	// O SACAR VAI SER PRATICAMENTE IGUAL, SÓ MUDANDO A LINHA 58, INVÉS DE CHAMAR CONTA.DEPOSITAR() É CONTA.SACAR()
