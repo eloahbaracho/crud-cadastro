@@ -1,7 +1,6 @@
 package com.nodebounty.domain.contacorrente;
 
 import java.util.Random;
-import java.util.UUID;
 
 import com.nodebounty.domain.cliente.Cliente;
 import com.nodebounty.domain.plano.Plano;
@@ -40,7 +39,7 @@ public class ContaCorrente {
 	private Plano plano;
 
 	@Column(name = "SALDOCONTA")
-	protected double saldoConta = 0.0;
+	private double saldoConta;
 	
 	/* Como a gente não vai usar o número para nenhuma operação matématica, acho que String é mais performático */
 	@Column(name = "NUMEROCONTA")
@@ -57,63 +56,13 @@ public class ContaCorrente {
         }
         this.numeroConta = sb.toString();
     }
-
-	
-	public String getnumeroConta() {
-		return numeroConta;
-	}
-	
-	public void setnumeroConta(String numeroConta) {
-		this.numeroConta = numeroConta;
-	}
-	public Cliente getCliente() {
-		return cliente;
-	}
-	
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-	
-	public Double getSaldo() {
-		return saldoConta = 0.0;
-		
-	}
-	
-	public void setSaldo(Double saldoConta) {
-		this.saldoConta = saldoConta;
-	}
-	
-	/* Transações */
-	
-   
-	
-	public void sacar(double valor) {
-        if (valor > 0 && valor <= saldoConta) {
-            saldoConta -= valor;
-            System.out.println("Saque de " + valor + " realizado com sucesso na conta.");
-            System.out.println("Saldo atual da conta: " + saldoConta);
-        } else {
-            throw new IllegalArgumentException("Saldo insuficiente para saque.");
-        }
-    }
-
+    
     public void depositar(double valor) {
-        if (valor > 0) {
-            saldoConta += valor;
-            System.out.println("Depósito de " + valor + " realizado com sucesso na conta.");
-            System.out.println("Saldo atual da conta: " + saldoConta);
-        } else {
-            throw new IllegalArgumentException("Valor inválido para depósito.");
-        }
+    	this.saldoConta += valor;
     }
-
-    public void transferir(ContaCorrente contaDestino, double valor) {
-        UUID idTransferencia = UUID.randomUUID(); // id da transferência
-        if ( valor < 0 && valor < saldoConta) {
-        saldoConta -= valor;
-        }
+    
+    public void sacar(double valor) {
+    	this.saldoConta -= valor;
     }
-	
-	
 	
 }
