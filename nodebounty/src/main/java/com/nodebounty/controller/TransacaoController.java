@@ -76,6 +76,7 @@ public class TransacaoController {
 	@Transactional
 	public ResponseEntity sacar(@RequestBody @Valid DadosSaqueTransacao json, HttpServletRequest request) {
 		var idCliente = request.getAttribute("idCliente");
+		var valor = json.valor();
 		var cliente = clienteRepository.findById((String) idCliente);
 		if (!cliente.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não pode ser encontrado no sistema"); }
@@ -83,11 +84,14 @@ public class TransacaoController {
 		if (conta == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Conta não encontrada no sistema");
 		}
-		var valor = request.getAttribute("valor");
-		var saldoConta = request.getAttribute("saldoConta");
-		if (valor > saldoConta) {
+		
+		var saldoConta = conta.getSaldoConta();
+		
+		if (valor >= saldoConta) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O valor precisa ser menor ou igual ao saldo da conta");
 		}
+		
+		
 		conta.sacar(json.valor());
 		contaRepository.save(conta);
 		var transacao = new Transacao();
