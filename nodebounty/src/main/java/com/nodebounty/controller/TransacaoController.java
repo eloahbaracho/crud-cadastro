@@ -83,6 +83,11 @@ public class TransacaoController {
 		if (conta == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Conta não encontrada no sistema");
 		}
+		var valor = request.getAttribute("valor");
+		var saldoConta = request.getAttribute("saldoConta");
+		if (valor > saldoConta) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O valor precisa ser menor ou igual ao saldo da conta");
+		}
 		conta.sacar(json.valor());
 		contaRepository.save(conta);
 		var transacao = new Transacao();
