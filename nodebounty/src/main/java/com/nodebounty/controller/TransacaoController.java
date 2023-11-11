@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nodebounty.domain.cliente.ClienteRepository;
 import com.nodebounty.domain.contacorrente.ContaCorrenteRepository;
 import com.nodebounty.domain.transacao.DadosDepositoTransacao;
+import com.nodebounty.domain.transacao.DadosSaqueTransacao;
 import com.nodebounty.domain.transacao.Transacao;
 import com.nodebounty.domain.transacao.TransacaoRepository;
 
@@ -70,6 +71,28 @@ public class TransacaoController {
 		// Retornando os dados da transação pro front-end, como 'comprovante'
 		return ResponseEntity.ok(transacao);
 	}
+	
+	@PostMapping("/sacar")
+	@Transactional
+	public ResponseEntity sacar(@RequestBody @Valid DadosSaqueTransacao json, HttpServletRequest request) {
+		var idCliente = request.getAttribute("idCliente");
+		var cliente = clienteRepository.findById((String) idCliente);
+		if (!cliente.isPresent()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não pode ser encontrado no sistema"); }
+		var conta = contaRepository.findByCliente(cliente.get());	
+		if (conta == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Conta não encontrada no sistema");
+		}
+		conta.sacar(json.valor());
+		contaRepository.save(conta);
+		var transacao = new Transacao();
+		transacao.setValorTransacao(json.valor());
+		transacao.setReceptor(conta);
+		transacaoRepository.save(transacao);
+		return ResponseEntity.ok(transacao);
+		
+	}
+	
 	
 	// O SACAR VAI SER PRATICAMENTE IGUAL, SÓ MUDANDO A LINHA 58, INVÉS DE CHAMAR CONTA.DEPOSITAR() É CONTA.SACAR()
 	// Além disso, tem que fazer uma verificação extra, para garantir que o cliente tem saldo suficiente. Caso não tenha
