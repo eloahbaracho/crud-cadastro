@@ -12,6 +12,7 @@ import com.nodebounty.domain.cliente.ClienteRepository;
 import com.nodebounty.domain.contacorrente.ContaCorrenteRepository;
 import com.nodebounty.domain.transacao.DadosDepositoTransacao;
 import com.nodebounty.domain.transacao.DadosSaqueTransacao;
+import com.nodebounty.domain.transacao.DadosTransferenciaTransacao;
 import com.nodebounty.domain.transacao.Transacao;
 import com.nodebounty.domain.transacao.TransacaoRepository;
 
@@ -87,7 +88,7 @@ public class TransacaoController {
 		
 		var saldoConta = conta.getSaldoConta();
 		
-		if (valor >= saldoConta) {
+		if (valor > saldoConta) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O valor precisa ser menor ou igual ao saldo da conta");
 		}
 		
@@ -96,16 +97,58 @@ public class TransacaoController {
 		contaRepository.save(conta);
 		var transacao = new Transacao();
 		transacao.setValorTransacao(json.valor());
-		transacao.setReceptor(conta);
+		transacao.setEmissor(conta);
 		transacaoRepository.save(transacao);
 		return ResponseEntity.ok(transacao);
 		
+		
 	}
+	@PostMapping("/transferir")
+    @Transactional
+    public ResponseEntity sacar(@RequestBody @Valid DadosTransferenciaTransacao json, HttpServletRequest request) {
+		var idCliente = request.getAttribute("idCliente");
+		var valor = json.valor();
+		var clienteEmissor = clienteRepository.findById((String) idCliente);
+			if (!clienteEmissor.isPresent()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Conta não encontrada");
+			}
+			
+			
+		var contaEmissor = contaRepository.findByCliente(clienteEmissor.get());
+			if (contaEmissor == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A conta emissora não existe");
+			}
+			
+		
+		var contaReceptor = contaRepository.findByNumeroConta(json.numeroConta());
+			if (contaReceptor == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A conta designada não foi encontrada");
+			}
+			
+			if (valor > contaEmissor.getSaldoConta()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O valor precisa ser menor ou igual ao saldo da conta");
+			}
+			
+			contaEmissor.sacar(valor);
+			contaReceptor.depositar(valor);
+			contaRepository.save(contaEmissor);
+			contaRepository.save(contaReceptor);
+		
+			var transacao = new Transacao();
+			transacao.setEmissor(contaEmissor);
+			transacao.setReceptor(contaReceptor);
+			transacao.setValorTransacao(valor);
+			transacaoRepository.save(transacao);
+			
+			return ResponseEntity.ok(transacao);
+			
+			
+		
+		
+	}
+        
 	
 	
-	// O SACAR VAI SER PRATICAMENTE IGUAL, SÓ MUDANDO A LINHA 58, INVÉS DE CHAMAR CONTA.DEPOSITAR() É CONTA.SACAR()
-	// Além disso, tem que fazer uma verificação extra, para garantir que o cliente tem saldo suficiente. Caso não tenha
-	// Retornar um badRequest()
 	
 	/*
 	 * A transferência vai meio que mesclar depositar e sacar. Uma conta a gente vai pegar pelo token, que será o emissor

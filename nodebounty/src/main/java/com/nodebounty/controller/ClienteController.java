@@ -46,6 +46,8 @@ public class ClienteController {
 	
 	@Autowired /* Injetando serviço de geração de token jwt para autenticação */
 	private TokenService tokenService;
+	
+	private final String idclie = "idCliente";
 
 	@GetMapping
 
@@ -59,7 +61,7 @@ public class ClienteController {
 	 */
 
 	public ResponseEntity getCliente(HttpServletRequest request) {
-		var idCliente = request.getAttribute("idCliente");
+		var idCliente = request.getAttribute(idclie);
 		
 		try {
 			var cliente = service.consultarCliente((String) idCliente);
@@ -104,7 +106,7 @@ public class ClienteController {
 	@PutMapping /* putmapping é o método para atualizar */
 	@Transactional
 	public ResponseEntity updateCliente(@RequestBody @Valid DadosAtualizacaoCliente data, HttpServletRequest request) {
-		var idCliente = request.getAttribute("idCliente");
+		var idCliente = request.getAttribute(idclie);
 		
 		try {
 			var clienteAtualizado = service.atualizarCliente(data, (String) idCliente);
@@ -124,7 +126,7 @@ public class ClienteController {
 	@DeleteMapping /* Método para deletar */
 	@Transactional
 	public ResponseEntity deleteCliente(HttpServletRequest request) {
-		var idCliente = request.getAttribute("idCliente");
+		var idCliente = request.getAttribute(idclie);
 		
 		try {
 			service.deletarCliente((String) idCliente);

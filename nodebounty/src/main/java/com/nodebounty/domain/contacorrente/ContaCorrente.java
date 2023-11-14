@@ -64,5 +64,21 @@ public class ContaCorrente {
     public void sacar(double valor) {
     	this.saldoConta -= valor;
     }
+    
+    /* public void transferir(ContaCorrente clienteEmissor, ContaCorrente clienteReceptor, double valor) {
+    	if (valor <= 0) {
+    		System.out.println("O valor da transferência deverá ser maior que 0");
+    		return;
+    	}
+    	if (this.saldoConta < valor) {
+    		System.out.println("O saldo da conta é insuficiente para realizar a transferência");
+    		return;
+    	}
+    		this.sacar(valor);
+    		clienteReceptor.depositar(valor);
+    		System.out.println("A transferência foi realizada com suscesso");
+    }
+    
+    */ 
 	
 }
