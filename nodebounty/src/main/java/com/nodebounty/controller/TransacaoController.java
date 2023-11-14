@@ -105,7 +105,7 @@ public class TransacaoController {
 	}
 	@PostMapping("/transferir")
     @Transactional
-    public ResponseEntity sacar(@RequestBody @Valid DadosTransferenciaTransacao json, HttpServletRequest request) {
+    public ResponseEntity transferir(@RequestBody @Valid DadosTransferenciaTransacao json, HttpServletRequest request) {
 		var idCliente = request.getAttribute("idCliente");
 		var valor = json.valor();
 		var clienteEmissor = clienteRepository.findById((String) idCliente);
@@ -129,6 +129,21 @@ public class TransacaoController {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O valor precisa ser menor ou igual ao saldo da conta");
 			}
 			
+			if (contaReceptor.getCliente().getEmail().equals("MAC@email.com") && contaEmissor.getPlano().getIdPlano().equals("Beauty")) {
+				var valorCashback = valor * 0.1;
+				contaEmissor.cashback(valorCashback);	
+				System.out.println("andsajhadbnsjd");
+			}
+			if (contaReceptor.getCliente().getEmail().equals("KaBum@email.com") && contaEmissor.getPlano().getIdPlano().equals("Tech")) {
+				var valorCashback = valor * 0.1;
+				contaEmissor.cashback(valorCashback);				
+			}
+			if (contaReceptor.getCliente().getEmail().equals("12345678912345678913") && contaEmissor.getPlano().getIdPlano().equals("Health")) {
+				var valorCashback = valor * 0.1;
+				contaEmissor.cashback(valorCashback);				
+			}
+
+
 			contaEmissor.sacar(valor);
 			contaReceptor.depositar(valor);
 			contaRepository.save(contaEmissor);
@@ -147,7 +162,25 @@ public class TransacaoController {
 		
 	}
         
+	@PostMapping("/resgatar")
+	public ResponseEntity resgatar(HttpServletRequest request) {
+		var idCliente = request.getAttribute("idCliente");
 	
+		var cliente = clienteRepository.findById((String) idCliente);
+			if (!cliente.isPresent()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Conta não encontrada");
+			}
+			
+			
+		var conta = contaRepository.findByCliente(cliente.get());
+			if (conta == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A conta emissora não existe");
+			}
+			
+		conta.resgatarCashback();
+		contaRepository.save(conta);
+		return ResponseEntity.ok().build();
+	}
 	
 	
 	/*
