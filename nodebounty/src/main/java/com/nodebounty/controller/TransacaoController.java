@@ -1,6 +1,7 @@
 package com.nodebounty.controller;
 
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nodebounty.domain.cliente.ClienteRepository;
 import com.nodebounty.domain.contacorrente.ContaCorrenteRepository;
 import com.nodebounty.domain.transacao.DadosDepositoTransacao;
+import com.nodebounty.domain.transacao.DadosListagemTransacao;
 import com.nodebounty.domain.transacao.DadosSaqueTransacao;
 import com.nodebounty.domain.transacao.DadosTransferenciaTransacao;
 import com.nodebounty.domain.transacao.Transacao;
@@ -190,7 +192,17 @@ public class TransacaoController {
 		// Recuperando e listando todas transações que a conta do cliente está envolvida
 		var transacoesComoEmissor = transacaoRepository.findAllByEmissor(conta);
 		var transacoesComoReceptor = transacaoRepository.findAllByReceptor(conta);
-		var transacoes = Stream.concat(transacoesComoEmissor.stream(), transacoesComoReceptor.stream()).toList();
+		
+		// Aqui vou salvar uma array de transações e a informação do tipo dela. Será algo como
+		// [{ transacao: {...dados da transacao}, role: 'entrada'}, transacao: {...dados da transacao}, role: 'saida'}]
+		List<DadosListagemTransacao> transacoes = new ArrayList<>();
+		
+		// Salvando as transações como emissor/saidas na nossa array transacoes
+		transacoesComoEmissor.forEach(emissor -> transacoes.add(new DadosListagemTransacao(emissor, "saida")));
+		
+		// Salvando as transações como receptor/entradas na nossa array transacoes
+		transacoesComoReceptor.forEach(receptor -> transacoes.add(new DadosListagemTransacao(receptor, "entrada")));
+		
 		return ResponseEntity.ok(transacoes);
 	}
 
