@@ -19,6 +19,8 @@ public class ClienteService implements IClienteService {
 	@Autowired /* Injetando classe para criptografar senha, no padrão que o springsecurity exige */
 	private PasswordEncoder passwordEncoder;
 	
+	private final String clientenaoenc = "cliente não encontrado";
+	
 	// Método para cadastrar o cliente
 	public void cadastrarCliente(DadosCadastroCliente data) throws Exception {
 		// Validando atributos que devem ser únicos, como: RG, CPF e Email
@@ -40,7 +42,7 @@ public class ClienteService implements IClienteService {
     	
     	// Verificando se o cliente existe
     	if (!cliente.isPresent()) {
-    		throw new RegistroNaoEncontradoException("Cliente não encontrado no sistema");
+    		throw new RegistroNaoEncontradoException(clientenaoenc);
     	}
     	
     	// Retornando os dados do cliente
@@ -53,7 +55,7 @@ public class ClienteService implements IClienteService {
     	
     	// Verificando se o cliente existe
     	if (!cliente.isPresent()) {
-    		throw new RegistroNaoEncontradoException("Cliente não encontrado no sistema");
+    		throw new RegistroNaoEncontradoException(clientenaoenc);
     	}
     	
     	// Verificando se a senha foi modificada. Caso tenha sido, gerar sua versão criptografada e atualizar o cliente
@@ -76,7 +78,7 @@ public class ClienteService implements IClienteService {
     	
     	// Retornando erro caso o id do cliente não exista no banco
     	if (!clienteExisteNoSistema) {
-    		throw new RegistroNaoEncontradoException("Cliente não encontrado no sistema");
+    		throw new RegistroNaoEncontradoException(clientenaoenc);
     	}
     	
     	// Excluindo o cliente

@@ -41,6 +41,9 @@ public class ContaCorrente {
 	@Column(name = "SALDOCONTA")
 	private double saldoConta;
 	
+	@Column(name = "CASHBACKCONTA")
+	private double cashbackConta;
+	
 	/* Como a gente não vai usar o número para nenhuma operação matématica, acho que String é mais performático */
 	@Column(name = "NUMEROCONTA")
 	private String numeroConta;
@@ -64,5 +67,30 @@ public class ContaCorrente {
     public void sacar(double valor) {
     	this.saldoConta -= valor;
     }
+    
+    public void cashback(double valor) {
+    	this.cashbackConta += valor;
+    }
+    
+    public void resgatarCashback() {
+    	this.saldoConta += this.cashbackConta;
+    	this.cashbackConta = 0;
+    }
+    
+    /* public void transferir(ContaCorrente clienteEmissor, ContaCorrente clienteReceptor, double valor) {
+    	if (valor <= 0) {
+    		System.out.println("O valor da transferência deverá ser maior que 0");
+    		return;
+    	}
+    	if (this.saldoConta < valor) {
+    		System.out.println("O saldo da conta é insuficiente para realizar a transferência");
+    		return;
+    	}
+    		this.sacar(valor);
+    		clienteReceptor.depositar(valor);
+    		System.out.println("A transferência foi realizada com suscesso");
+    }
+    
+    */ 
 	
 }

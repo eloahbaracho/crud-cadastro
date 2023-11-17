@@ -9,5 +9,7 @@ public interface ContaCorrenteRepository extends JpaRepository<ContaCorrente, St
 	ContaCorrente findByCliente(Cliente cliente);
 
 	boolean existsByCliente(Cliente cliente);
+
+	ContaCorrente findByNumeroConta(String numeroConta);
 	
 }

@@ -23,6 +23,8 @@ public class CartaoService implements ICartaoService {
 	
 	@Autowired
 	private ContaCorrenteRepository contaRepository;
+	
+	private final String Contanaoencontrada = "Conta não encontrada no sistema";
 
 	
 	// Ja que optamos por separar o cliente da conta, pra facilitar nas requisições, invés de receber
@@ -40,7 +42,7 @@ public class CartaoService implements ICartaoService {
     	
     	// Verificando se a conta existe
     	if (conta == null) {
-    		throw new RegistroNaoEncontradoException("Conta não encontrada no sistema");
+    		throw new RegistroNaoEncontradoException(Contanaoencontrada);
     	}
     	
     	// Gerando o cartão, validações bem sucedidas
@@ -64,7 +66,7 @@ public class CartaoService implements ICartaoService {
     	
     	// Verificando se a conta existe
     	if (conta == null) {
-    		throw new RegistroNaoEncontradoException("Conta não encontrada no sistema");
+    		throw new RegistroNaoEncontradoException(Contanaoencontrada);
     	}
     	
     	// Buscando e retornando todos cartoes associados a conta
@@ -77,7 +79,7 @@ public class CartaoService implements ICartaoService {
     	
     	// Retornando erro caso o id do cartao não exista no banco
     	if (!cartaoExisteNoSistema) {
-    		throw new RegistroNaoEncontradoException("Conta não encontrada no sistema");
+    		throw new RegistroNaoEncontradoException(Contanaoencontrada);
     	}
     	
     	// Excluindo cartao
