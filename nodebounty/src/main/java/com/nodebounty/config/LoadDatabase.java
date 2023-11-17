@@ -61,6 +61,8 @@ public class LoadDatabase {
 			// Salvando conta para testes
 			var conta1 = new ContaCorrente("6f78fac2-fe0d-4634-a3bf-025803557096", cliente1, Beauty, 0.0, 0.0,"12345678912345678912");
 			var conta2 = new ContaCorrente("6f88fac2-fe0d-4634-a3bf-025803557096", cliente2, Tech, 0.0, 0.0,"12345678912945678912");
+			repositoryConta.saveAll(Arrays.asList(conta1, conta2));
+			
 			var contaEmpresa1 = new ContaCorrente("6f78fac2-fe0d-4434-a3bf-025803557096", clienteEmpresa1, Beauty, 0.0, 0.0,"12345678912345678912");
 			var contaEmpresa2 = new ContaCorrente("6f88fac2-fe0d-4834-a3bf-025803557096", clienteEmpresa2, Tech, 0.0, 0.0,"12345678912945678912");
 			var contaEmpresa3 = new ContaCorrente("6f78fac2-fe0d-4934-a3bf-025803557096", clienteEmpresa3, Health, 0.0, 0.0,"12345678912345678912");
