@@ -3,6 +3,7 @@ CREATE TABLE contacorrente (
 	idCliente TEXT NOT NULL UNIQUE,
 	idPlano TEXT NOT NULL,
 	saldoConta DOUBLE NOT NULL,
+	cashbackConta DOUBLE NOT NULL,
 	numeroConta TEXT UNIQUE NOT NULL
 );
 
