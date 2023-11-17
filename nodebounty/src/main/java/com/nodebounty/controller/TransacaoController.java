@@ -135,20 +135,19 @@ public class TransacaoController {
 					.body("O valor precisa ser menor ou igual ao saldo da conta");
 		}
 
-		if (contaReceptor.getCliente().getEmail().equals("MAC@email.com")
+		if (contaReceptor.getCliente().getEmail().equals("mac@gmail.com")
 				&& contaEmissor.getPlano().getIdPlano().equals("Beauty")) {
-			var valorCashback = valor * 0.1;
+			var valorCashback = valor * (contaEmissor.getPlano().getPorcentagemCashback() / 100);
 			contaEmissor.cashback(valorCashback);
-			System.out.println("andsajhadbnsjd");
 		}
-		if (contaReceptor.getCliente().getEmail().equals("KaBum@email.com")
+		if (contaReceptor.getCliente().getEmail().equals("kabum@gmail.com")
 				&& contaEmissor.getPlano().getIdPlano().equals("Tech")) {
-			var valorCashback = valor * 0.1;
+			var valorCashback = valor * (contaEmissor.getPlano().getPorcentagemCashback() / 100);
 			contaEmissor.cashback(valorCashback);
 		}
-		if (contaReceptor.getCliente().getEmail().equals("12345678912345678913")
+		if (contaReceptor.getCliente().getEmail().equals("growth@gmail.com")
 				&& contaEmissor.getPlano().getIdPlano().equals("Health")) {
-			var valorCashback = valor * 0.1;
+			var valorCashback = valor * (contaEmissor.getPlano().getPorcentagemCashback() / 100);
 			contaEmissor.cashback(valorCashback);
 		}
 
