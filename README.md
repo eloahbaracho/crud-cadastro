@@ -1,7 +1,18 @@
 ### Fatec - Centro Paula Souza
 ##### Curso - Desenvolvimento de Software Multiplataforma
 ##### Estudo de Caso – NodeBounty
-> No contexto do projeto interdisciplinar o estudo de caso tem como objetivo desenvolver e implantar o Sistema NodeBounty. Esse sistema possui o referencial de fintechs modernas, que oferecem serviços e soluções financeiras de maneira prática e imediata. A fintech NodeBounty contará com o cadastro do cliente, visualização de conta corrente, serviço de cashback, extrato bancário, transações entre contas NodeBounty e outras funcionalidades.
+O NodeBounty é um projeto de fintech prototipado e desenvolvido no
+terceiro semestre de Desenvolvimento de Software Multiplataforma da
+Fatec Zona Leste por alunos com um enorme interesse em tecnologia que
+visam a qualificação para a entrada no mercado de trabalho. O intento
+em centrar nossos esforços em um projeto de fintech é a
+inevitabilidade de nichar nossos estudos,
+explorando ao máximo linguagens, bibliotecas e frameworks que
+corroborem com o progresso de aprendizado. Com o boom dos serviços
+financeiros no Brasil, a reinvenção se fez necessária. O que distingue
+o Node Bounty das demais conveniências financeiras é a possibilidade
+de integrar o advento de aquisições constantes em estabelecimentos específicos em vantagens
+reais. Buscamos oferecer o suporte ao público que adquire o mesmo nicho de produto de maneira abundante. 
 
 Time de desenvolvimento
 - Dayvid Dalton
